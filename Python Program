@@ -1,0 +1,39 @@
+while True:
+    Name = input("Your Name: ")
+    Age = input("Your Age:")
+    print(f"\nHello, {Name} {(Age)}! Let's classify your blood sugar and cholesterol values.")
+
+# Data User
+    blood_sugar = float(input("Your Blood Sugar Level in mg/dL: "))
+    total_cholesterol = float(input("Your total cholesterol Level in mg/dL: "))
+    hdl_cholesterol = float(input("Your HDL cholesterol Level in mg/dL: "))
+    ldl_cholesterol = float(input("Your LDL cholesterol Level in mg/dL: "))
+    triglycerides = float(input("Your triglycerides level in mg/dL: "))
+
+# Classfy of Blood Sugar Level
+    if blood_sugar < 70:
+        blood_sugar_class = "low"
+    elif blood_sugar < 100:
+        blood_sugar_class = "normal"
+    elif blood_sugar < 126:
+        blood_sugar_class = "high"
+    else:
+        blood_sugar_class = "very high"
+
+# Classfy of Cholesterol Level
+    if total_cholesterol < 200 and hdl_cholesterol >= 40 and ldl_cholesterol < 130 and triglycerides < 150:
+        cholesterol_class = "Normal"
+    elif total_cholesterol >= 240 or hdl_cholesterol < 40 or ldl_cholesterol >= 160 or triglycerides >= 200:
+        cholesterol_class = "high risk"
+    else:
+        cholesterol_class = "borderline"
+
+# Print results
+    print(f"\n{Name}, Your Level Blood Sugar is {blood_sugar_class}.")
+    print(f"Your Level Cholesterol is {cholesterol_class}.\n")
+
+# Ask if user wants to continue
+    response = input("Would you like to check another person's? (y/n) ")
+    if response.lower() != "y":
+        break
+print("Thank you! for using this programm")
