@@ -1,0 +1,60 @@
+select island from PortfolioProject..Covid19Indo
+
+--data that we are going to be using
+
+Select location, island, date, Total_Cases, New_Cases, Total_Deaths, Population
+from PortfolioProject..Covid19Indo
+where location <>'Indonesia'
+order by 1,2
+
+
+--looking total cases vs total deaths
+Select province, date, Total_Cases, Total_Deaths, (total_deaths/total_cases)*100 as DeathPercentage
+from PortfolioProject..Covid19Indo
+where province  <>''
+order by 1,2 desc
+
+--looking at total cases vs population
+--show what percentage of population got coivid
+Select Province, date, (cast(Total_Cases as int)) as total_cases, Population, (cast(total_cases as int)/Population)*100 as PercentagePopulationInfected
+from PortfolioProject..Covid19Indo
+where province  <>''
+order by 1,2 desc
+
+--looking at province with highest infection rate compared to population
+Select province, Population, max(cast(Total_Cases as int)) as HighestInfectionCount, max(cast(total_cases as int)/Population)*100 as PercentagePopulationInfected
+from PortfolioProject..Covid19Indo
+where province is not null and province <>''
+group by province, population
+order by PercentagePopulationInfected desc
+
+--showing location with the highest death count per population
+Select province, max(cast(total_deaths as int)) as TotalDeathCount
+from PortfolioProject..Covid19Indo
+where province is not null and province <>''
+--where location <>'Indonesia'
+group by Province
+order by TotalDeathCount desc
+
+--Let's break things down by island
+
+--showing island with the highest death count per population
+Select island, max(cast(total_deaths as int)) as TotalDeathCount
+from PortfolioProject..Covid19Indo
+--where province is not null and province <>''
+where island <>''
+group by island
+order by TotalDeathCount desc
+
+--Global number
+select sum(new_cases) as total_cases, sum(cast(new_deaths as int)) as total_deaths, sum(cast(new_deaths as int))/sum(new_cases)*100 
+as DeathPercetage
+from PortfolioProject..Covid19Indo
+order by 1,2 
+
+ 
+
+
+
+
+
